@@ -7,6 +7,7 @@ import TransactionList from "./components/TransactionList";
 import AddTransactionModal from "./components/AddTransactionModal";
 import DebtList from "./components/DebtList";
 import { useGlobalContext } from "./context";
+import ExpenseList from "./components/ExpenseList";
 
 function App() {
   const { addUsers } = useGlobalContext();
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route path="/debts">
             <DebtList />
+          </Route>
+          <Route path="/expenses">
+            <ExpenseList />
           </Route>
         </Switch>
       </Router>

@@ -1,24 +1,26 @@
 import Debt from "./Debt";
 import { useGlobalContext } from "../context";
+import { useEffect, useState } from "react";
 const DebtList = () => {
+  const [debtsArray, setDebtsArray] = useState([]);
   const { users } = useGlobalContext();
-  const debtsArray = () => {
-    let arr = [];
+  const updateDebtsArray = () => {
+    let newDebtsArray = [];
     users.map((user) => {
       if (user.debts.length > 0) {
-        arr = user.debts.map((debt, index) => {
-          const id = new Date().getTime().toString() + index;
-          console.log(debt);
-          return { ...debt, debtor: user, id };
+        user.debts.map((debt) => {
+          newDebtsArray.push({ ...debt, debtor: user });
         });
       }
     });
-    return arr;
+    setDebtsArray(newDebtsArray);
   };
+  useEffect(() => {
+    updateDebtsArray();
+  }, [users]);
   return (
-    <div className="debt-list">
-      <button className="add-btn">+</button>
-      {debtsArray().map((debt) => {
+    <div className="list-container">
+      {debtsArray.map((debt) => {
         return <Debt key={debt.id} {...debt} />;
       })}
     </div>

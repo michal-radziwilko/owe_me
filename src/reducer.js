@@ -15,23 +15,38 @@ const reducer = (state, action) => {
     return { ...state, transactions: [...state.transactions, action.payload] };
   }
   if (action.type === "UPDATE_DEBTS") {
-    console.log("UPDATE_DEBTS");
     const sender = action.payload.sender;
     const receiver = action.payload.receiver;
     const amount = action.payload.amount;
-    const debt = { creditor: sender, amount };
+    const debtId = new Date().getTime().toString();
+    let debtAmount = amount;
+    let creditorId = sender.id;
+    let debtorId = receiver.id;
+    sender.debts.map((debt) => {
+      if (debt.creditor.id === receiver.id) {
+        debtAmount -= debt.amount;
+      }
+    });
+    if (debtAmount <= 0) {
+      debtorId = sender.id;
+      creditorId = receiver.id;
+    }
+    const debt = { creditor: sender, amount: Math.abs(debtAmount), id: debtId };
     const newUsers = state.users.map((user) => {
-      if (user.id === receiver.id) {
-        let isCreditor = false;
+      if (user.id === debtorId) {
+        let allreadyCreditor = false;
         for (let i = 0; i < user.debts.length; i++) {
-          if (user.debts[i].creditor.id === sender.id) {
-            user.debts[i].amount += amount;
-            isCreditor = true;
+          if (user.debts[i].creditor.id === creditorId) {
+            user.debts[i] = {
+              ...user.debts[i],
+              amount: Math.abs(debtAmount),
+              id: debtId,
+            };
+            allreadyCreditor = true;
           }
         }
-        if (!isCreditor) {
+        if (!allreadyCreditor) {
           user.debts = [...user.debts, debt];
-          console.log(debt);
         }
       }
       return user;

@@ -9,7 +9,7 @@ const TransactionList = () => {
       <button className="add-btn" onClick={openAddTransactionModal}>
         +
       </button>
-      <section className="transaction-list">
+      <section className="list-container">
         {transactions.length > 0 ? (
           <div className="transaction-list-headers">
             <p>from</p>

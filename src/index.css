@@ -33,6 +33,7 @@ body {
   line-height: 1.4;
   font-size: 1rem;
   font-weight: 300;
+  text-transform: capitalize;
 }
 ul {
   list-style-type: none;
@@ -71,7 +72,6 @@ NavBar
   align-items: center;
 }
 .nav-links a {
-  text-transform: capitalize;
   display: inline-block;
   font-weight: bold;
   margin-right: 0.5rem;
@@ -112,7 +112,7 @@ User
     width: 95vw;
   }
 }
-.user-list {
+.list-container {
   width: 90vw;
   margin: 5rem auto;
   max-width: var(--maxWidth);
@@ -120,6 +120,7 @@ User
   border-radius: 0.25rem;
   padding: 1.5rem 2rem;
   box-shadow: var(--darkShadow);
+  overflow: hidden;
 }
 .user-selector-list {
   margin-left: 2rem;
@@ -140,34 +141,33 @@ User
 Transaction
 ==========
  */
-.transaction-container {
+.transaction {
   display: grid;
   grid-template-columns: 2fr 2fr 1fr 1fr;
   column-gap: 0.75rem;
   margin-bottom: 1rem;
   margin-top: 1rem;
   align-items: center;
+  justify-items: center;
 }
-.transaction-list {
-  width: 90vw;
-  margin: 5rem auto;
-  max-width: var(--maxWidth);
-  background: var(--primaryLightColor);
-  border-radius: 0.25rem;
-  padding: 1.5rem 2rem;
-  box-shadow: var(--darkShadow);
+.transaction p {
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 .transaction-list-headers {
   display: grid;
   grid-template-columns: 2fr 2fr 1fr 1fr;
   font-size: 1.5rem;
   font-weight: 600;
-  text-transform: capitalize;
+  margin-left: 1rem;
 }
 .transaction-list h3 {
   text-align: center;
-  text-transform: capitalize;
 }
+.transaction :hover {
+  background: var(--primaryColor);
+}
+
 /*
 ========== 
 Modal
@@ -212,7 +212,6 @@ Modal
   cursor: pointer;
 }
 .modal-container h3 {
-  text-transform: capitalize;
   font-size: 3rem;
   font-weight: 500;
 }
@@ -228,7 +227,26 @@ Debt
   display: grid;
   grid-template-columns: 2fr 1fr 2fr 1fr;
   align-items: center;
-  margin-top: 5rem;
+  margin-top: 1rem;
+  justify-items: center;
+}
+.debt p {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+/*
+========== 
+Expense
+==========
+ */
+.expense {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  align-items: center;
+}
+.expense p {
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 /*
 ========== 

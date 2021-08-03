@@ -4,7 +4,7 @@ import User from "./User";
 const UserList = () => {
   const { users } = useGlobalContext();
   return (
-    <section className="user-list">
+    <section className="list-container">
       {users &&
         users.map((user) => {
           return <User key={user.id} {...user} />;

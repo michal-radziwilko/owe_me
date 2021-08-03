@@ -1,12 +1,10 @@
 import User from "./User";
 import { useGlobalContext } from "../context";
-const Debt = ({ debtor, creditor, amount }) => {
+const Expense = ({ user, amount }) => {
   const { currency } = useGlobalContext();
   return (
-    <div className="debt">
-      <User {...debtor} />
-      <h3>owes</h3>
-      <User {...creditor} />
+    <div className="expense">
+      <User {...user} />
       <p>
         {amount}
         {currency}
@@ -14,4 +12,4 @@ const Debt = ({ debtor, creditor, amount }) => {
     </div>
   );
 };
-export default Debt;
+export default Expense;

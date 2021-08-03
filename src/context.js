@@ -8,6 +8,7 @@ const AppProvider = ({ children }) => {
     isAddTransactionModalOpen: false,
     transactionSender: {},
     transactionReceiver: {},
+    currency: "$",
   };
   const [state, dispatch] = useReducer(reducer, initialValue);
   const fetchUsers = async (url) => {
