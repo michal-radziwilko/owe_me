@@ -125,7 +125,7 @@ User
 .user-selector-list {
   margin-left: 2rem;
   margin-right: 2rem;
-  height: 80%;
+  height: 75%;
   width: 75%;
   overflow: hidden;
   overflow-y: scroll;
@@ -196,6 +196,7 @@ Modal
   text-align: center;
   place-items: center;
   position: relative;
+  justify-items: auto;
 }
 .close-AddTransactionModal-btn {
   position: absolute;
@@ -244,6 +245,31 @@ Expense
 .expense p {
   font-size: 1.2rem;
   font-weight: 500;
+}
+/*
+========== 
+Alert
+==========
+ */
+.alert {
+  margin: 5rem auto;
+  height: auto;
+  width: 30vw;
+  display: grid;
+  align-items: center;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  border-radius: 0.25rem;
+  text-transform: capitalize;
+}
+.alert-danger {
+  color: #721c24;
+  background: #f8d7da;
+}
+.alert-success {
+  color: #155724;
+  background: #d4edda;
 }
 /*
 ========== 

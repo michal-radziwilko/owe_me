@@ -2,10 +2,12 @@ import Debt from "./Debt";
 import { useGlobalContext } from "../context";
 import { useEffect, useState } from "react";
 import AddTransactionModal from "./AddTransactionModal";
+import Alert from "./Alert";
 const DebtList = () => {
   const [debtsArray, setDebtsArray] = useState([]);
   const [debt, setDebt] = useState(null);
-  const { users, openAddTransactionModal } = useGlobalContext();
+  const { users, openAddTransactionModal, alert, transactions } =
+    useGlobalContext();
   const updateDebtsArray = () => {
     let newDebtsArray = [];
     users.map((user) => {
@@ -29,16 +31,21 @@ const DebtList = () => {
     openAddTransactionModal();
   };
   return (
-    <div className="list-container">
+    <>
       {<AddTransactionModal {...debt} />}
-      {debtsArray.map((debt) => {
-        return (
-          <div key={debt.id} onClick={() => handleClick(debt)}>
-            <Debt {...debt} />
-          </div>
-        );
-      })}
-    </div>
+      {alert.show && (
+        <Alert type={alert.type} msg={alert.msg} list={transactions} />
+      )}
+      <div className="list-container">
+        {debtsArray.map((debt) => {
+          return (
+            <div key={debt.id} onClick={() => handleClick(debt)}>
+              <Debt {...debt} />
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
 export default DebtList;

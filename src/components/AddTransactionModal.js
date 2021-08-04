@@ -8,6 +8,7 @@ const AddTransactionModal = ({ _sender, _receiver, _amount }) => {
     isAddTransactionModalOpen,
     closeAddTransactionModal,
     addTransaction,
+    showAlert,
   } = useGlobalContext();
   const [amount, setAmount] = useState(0);
   const [sender, setSender] = useState(_sender ? _sender : {});
@@ -21,20 +22,36 @@ const AddTransactionModal = ({ _sender, _receiver, _amount }) => {
   }, [_sender, _receiver, _amount]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    const transaction = {
-      id: new Date().getTime().toString(),
-      date: new Date(),
-      sender,
-      receiver,
-      amount,
-    };
-    addTransaction(transaction);
+    if (
+      Object.keys(sender).length > 0 &&
+      Object.keys(receiver).length > 0 &&
+      amount > 0
+    ) {
+      const transaction = {
+        id: new Date().getTime().toString(),
+        date: new Date(),
+        sender,
+        receiver,
+        amount,
+      };
+      addTransaction(transaction);
+      showAlert("success", "Transaction Successfull");
+    } else {
+      showAlert(
+        "danger",
+        "Transaction failed. Please select both transaction parties."
+      );
+    }
+    handleCloseModal();
   };
-  const clearTransactionSender = () => {
+  const clearTransaction = () => {
     setSender({});
-  };
-  const clearTransactionReceiver = () => {
     setReceiver({});
+    setAmount(0);
+  };
+  const handleCloseModal = () => {
+    closeAddTransactionModal();
+    clearTransaction();
   };
   return (
     <div
@@ -44,7 +61,9 @@ const AddTransactionModal = ({ _sender, _receiver, _amount }) => {
         <h3>from:</h3>
         {Object.keys(sender).length !== 0 ? (
           <div
-            onClick={clearTransactionSender}
+            onClick={() => {
+              setSender({});
+            }}
             className="selected-transaction-party"
           >
             <User {...sender} />
@@ -55,7 +74,9 @@ const AddTransactionModal = ({ _sender, _receiver, _amount }) => {
         <h3>to:</h3>
         {Object.keys(receiver).length !== 0 ? (
           <div
-            onClick={clearTransactionReceiver}
+            onClick={() => {
+              setReceiver({});
+            }}
             className="selected-transaction-party"
           >
             <User {...receiver} />
@@ -78,7 +99,7 @@ const AddTransactionModal = ({ _sender, _receiver, _amount }) => {
         </form>
         <button
           className="close-AddTransactionModal-btn"
-          onClick={closeAddTransactionModal}
+          onClick={handleCloseModal}
         >
           <FaTimes />
         </button>

@@ -65,6 +65,22 @@ const reducer = (state, action) => {
     }
     return { ...state, users: newUsers };
   }
+  if (action.type === "SHOW_ALERT") {
+    return {
+      ...state,
+      alert: { show: true, msg: action.payload.msg, type: action.payload.type },
+    };
+  }
+  if (action.type === "HIDE_ALERT") {
+    return {
+      ...state,
+      alert: {
+        show: false,
+        msg: "",
+        type: "",
+      },
+    };
+  }
   throw new Error("no matching action type");
 };
 export default reducer;

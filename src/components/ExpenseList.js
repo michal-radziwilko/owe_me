@@ -22,13 +22,21 @@ const ExpenseList = () => {
       if (!senderInExpenses) {
         newExpenses = [
           ...newExpenses,
-          { user: transaction.sender, amount: transaction.amount },
+          {
+            id: new Date().getTime().toString() + transaction.sender.id,
+            user: transaction.sender,
+            amount: transaction.amount,
+          },
         ];
       }
       if (!receiverInExpenses) {
         newExpenses = [
           ...newExpenses,
-          { user: transaction.receiver, amount: -transaction.amount },
+          {
+            id: new Date().getTime().toString() + transaction.receiver.id,
+            user: transaction.receiver,
+            amount: -transaction.amount,
+          },
         ];
       }
     });
@@ -40,7 +48,7 @@ const ExpenseList = () => {
   return (
     <div className="list-container">
       {expenses.map((expense) => {
-        return <Expense {...expense} />;
+        return <Expense key={expense.id} {...expense} />;
       })}
     </div>
   );

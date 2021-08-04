@@ -9,6 +9,11 @@ const AppProvider = ({ children }) => {
     transactionSender: {},
     transactionReceiver: {},
     currency: "$",
+    alert: {
+      show: false,
+      type: "",
+      msg: "",
+    },
   };
   const [state, dispatch] = useReducer(reducer, initialValue);
   const fetchUsers = async (url) => {
@@ -50,6 +55,12 @@ const AppProvider = ({ children }) => {
   const closeAddTransactionModal = () => {
     dispatch({ type: "CLOSE_ADD_TRANSACTION_MODAL" });
   };
+  const showAlert = (type, msg) => {
+    dispatch({ type: "SHOW_ALERT", payload: { msg, type } });
+  };
+  const hideAlert = () => {
+    dispatch({ type: "HIDE_ALERT" });
+  };
   return (
     <AppContext.Provider
       value={{
@@ -58,6 +69,8 @@ const AppProvider = ({ children }) => {
         addTransaction,
         openAddTransactionModal,
         closeAddTransactionModal,
+        showAlert,
+        hideAlert,
       }}
     >
       {children}
