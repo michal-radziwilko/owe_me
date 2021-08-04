@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "../context";
 import { FaTimes } from "react-icons/fa";
 import UserSelector from "./UserSelector";
 import User from "./User";
-const AddTransactionModal = () => {
+const AddTransactionModal = ({ _sender, _receiver, _amount }) => {
   const {
     isAddTransactionModalOpen,
     closeAddTransactionModal,
     addTransaction,
   } = useGlobalContext();
   const [amount, setAmount] = useState(0);
-  const [sender, setSender] = useState({});
-  const [receiver, setReceiver] = useState({});
+  const [sender, setSender] = useState(_sender ? _sender : {});
+  const [receiver, setReceiver] = useState(_receiver ? _receiver : {});
+  useEffect(() => {
+    if (_sender && _receiver && _amount) {
+      setAmount(`${_amount}`);
+      setSender(_sender);
+      setReceiver(_receiver);
+    }
+  }, [_sender, _receiver, _amount]);
   const handleSubmit = (e) => {
     e.preventDefault();
     const transaction = {

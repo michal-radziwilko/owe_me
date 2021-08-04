@@ -46,6 +46,16 @@ img {
   width: 100%;
   display: block;
 }
+.list-container {
+  width: 90vw;
+  margin: 5rem auto;
+  max-width: var(--maxWidth);
+  background: var(--primaryLightColor);
+  border-radius: 0.25rem;
+  padding: 1.5rem 2rem;
+  box-shadow: var(--darkShadow);
+  overflow: hidden;
+}
 /*
 ========== 
 NavBar
@@ -112,20 +122,10 @@ User
     width: 95vw;
   }
 }
-.list-container {
-  width: 90vw;
-  margin: 5rem auto;
-  max-width: var(--maxWidth);
-  background: var(--primaryLightColor);
-  border-radius: 0.25rem;
-  padding: 1.5rem 2rem;
-  box-shadow: var(--darkShadow);
-  overflow: hidden;
-}
 .user-selector-list {
   margin-left: 2rem;
   margin-right: 2rem;
-  height: 65%;
+  height: 80%;
   width: 75%;
   overflow: hidden;
   overflow-y: scroll;
@@ -164,10 +164,6 @@ Transaction
 .transaction-list h3 {
   text-align: center;
 }
-.transaction :hover {
-  background: var(--primaryColor);
-}
-
 /*
 ========== 
 Modal
@@ -229,6 +225,7 @@ Debt
   align-items: center;
   margin-top: 1rem;
   justify-items: center;
+  cursor: pointer;
 }
 .debt p {
   font-size: 1.2rem;

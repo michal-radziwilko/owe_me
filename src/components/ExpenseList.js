@@ -5,25 +5,30 @@ const ExpenseList = () => {
   const [expenses, setExpenses] = useState([]);
   const { transactions } = useGlobalContext();
   const calculateExpenses = () => {
-    /*
-    ========== 
-    TO DO: 
-        TAKE INTO ACCOUNT DEBTS SETTLEMENTS
-    ==========
-    */
     let newExpenses = [...expenses];
     transactions.map((transaction) => {
-      let userInExpenses = false;
+      let senderInExpenses = false;
+      let receiverInExpenses = false;
       for (let i = 0; i < newExpenses.length; i++) {
         if (newExpenses[i].user.id === transaction.sender.id) {
           newExpenses[i].amount += transaction.amount;
-          userInExpenses = true;
+          senderInExpenses = true;
+        }
+        if (newExpenses[i].user.id === transaction.receiver.id) {
+          newExpenses[i].amount -= transaction.amount;
+          receiverInExpenses = true;
         }
       }
-      if (!userInExpenses) {
+      if (!senderInExpenses) {
         newExpenses = [
           ...newExpenses,
           { user: transaction.sender, amount: transaction.amount },
+        ];
+      }
+      if (!receiverInExpenses) {
+        newExpenses = [
+          ...newExpenses,
+          { user: transaction.receiver, amount: -transaction.amount },
         ];
       }
     });

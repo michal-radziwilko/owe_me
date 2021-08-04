@@ -27,30 +27,42 @@ const reducer = (state, action) => {
         debtAmount -= debt.amount;
       }
     });
-    if (debtAmount <= 0) {
+    if (debtAmount < 0) {
       debtorId = sender.id;
       creditorId = receiver.id;
     }
     const debt = { creditor: sender, amount: Math.abs(debtAmount), id: debtId };
-    const newUsers = state.users.map((user) => {
-      if (user.id === debtorId) {
-        let allreadyCreditor = false;
-        for (let i = 0; i < user.debts.length; i++) {
-          if (user.debts[i].creditor.id === creditorId) {
-            user.debts[i] = {
-              ...user.debts[i],
-              amount: Math.abs(debtAmount),
-              id: debtId,
-            };
-            allreadyCreditor = true;
+    let newUsers = [];
+    if (debtAmount === 0) {
+      newUsers = state.users.map((user) => {
+        if (user.id === sender.id) {
+          user.debts = user.debts.filter(
+            (debt) => debt.creditor.id !== receiver.id
+          );
+        }
+        return user;
+      });
+    } else {
+      newUsers = state.users.map((user) => {
+        if (user.id === debtorId) {
+          let allreadyCreditor = false;
+          for (let i = 0; i < user.debts.length; i++) {
+            if (user.debts[i].creditor.id === creditorId) {
+              user.debts[i] = {
+                ...user.debts[i],
+                amount: Math.abs(debtAmount),
+                id: debtId,
+              };
+              allreadyCreditor = true;
+            }
+          }
+          if (!allreadyCreditor) {
+            user.debts = [...user.debts, debt];
           }
         }
-        if (!allreadyCreditor) {
-          user.debts = [...user.debts, debt];
-        }
-      }
-      return user;
-    });
+        return user;
+      });
+    }
     return { ...state, users: newUsers };
   }
   throw new Error("no matching action type");
