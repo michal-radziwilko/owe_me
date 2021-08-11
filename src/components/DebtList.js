@@ -6,8 +6,13 @@ import Alert from "./Alert";
 const DebtList = () => {
   const [debtsArray, setDebtsArray] = useState([]);
   const [debt, setDebt] = useState(null);
-  const { users, openAddTransactionModal, alert, transactions } =
-    useGlobalContext();
+  const {
+    users,
+    openAddTransactionModal,
+    alert,
+    transactions,
+    isAddTransactionModalOpen,
+  } = useGlobalContext();
   const updateDebtsArray = () => {
     let newDebtsArray = [];
     users.map((user) => {
@@ -32,18 +37,24 @@ const DebtList = () => {
   };
   return (
     <>
-      {<AddTransactionModal {...debt} />}
+      {isAddTransactionModalOpen && (
+        <AddTransactionModal {...debt} isDebtSettlement={true} />
+      )}
       {alert.show && (
         <Alert type={alert.type} msg={alert.msg} list={transactions} />
       )}
       <div className="list-container">
-        {debtsArray.map((debt) => {
-          return (
-            <div key={debt.id} onClick={() => handleClick(debt)}>
-              <Debt {...debt} />
-            </div>
-          );
-        })}
+        {debtsArray.length > 0 ? (
+          debtsArray.map((debt) => {
+            return (
+              <div key={debt.id} onClick={() => handleClick(debt)}>
+                <Debt {...debt} />
+              </div>
+            );
+          })
+        ) : (
+          <h3>no debts</h3>
+        )}
       </div>
     </>
   );

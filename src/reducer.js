@@ -18,7 +18,7 @@ const reducer = (state, action) => {
     const sender = action.payload.sender;
     const receiver = action.payload.receiver;
     const amount = action.payload.amount;
-    const debtId = new Date().getTime().toString();
+    const debtId = new Date().getTime().toString() + receiver.id;
     let debtAmount = amount;
     let creditorId = sender.id;
     let debtorId = receiver.id;

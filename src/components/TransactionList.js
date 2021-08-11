@@ -2,11 +2,18 @@ import React from "react";
 import { useGlobalContext } from "../context";
 import Transaction from "./Transaction";
 import Alert from "./Alert";
+import AddTransactionModal from "./AddTransactionModal";
 
 const TransactionList = () => {
-  const { transactions, openAddTransactionModal, alert } = useGlobalContext();
+  const {
+    transactions,
+    openAddTransactionModal,
+    alert,
+    isAddTransactionModalOpen,
+  } = useGlobalContext();
   return (
     <div>
+      {isAddTransactionModalOpen && <AddTransactionModal />}
       <button className="add-btn" onClick={openAddTransactionModal}>
         +
       </button>
@@ -22,11 +29,15 @@ const TransactionList = () => {
             <p>amount</p>
           </div>
         ) : (
-          <h3>no transactions</h3>
+          <h3>no transactions (click the "+" button to add transactions)</h3>
         )}
         {transactions &&
           transactions.map((transaction) => {
-            return <Transaction key={transaction.id} {...transaction} />;
+            return (
+              !transaction.isDebtSettlement && (
+                <Transaction key={transaction.id} {...transaction} />
+              )
+            );
           })}
       </div>
     </div>

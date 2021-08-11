@@ -4,10 +4,17 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import UserList from "./components/UserList";
 import TransactionList from "./components/TransactionList";
-import AddTransactionModal from "./components/AddTransactionModal";
 import DebtList from "./components/DebtList";
 import { useGlobalContext } from "./context";
 import ExpenseList from "./components/ExpenseList";
+
+/*
+========== 
+TO-DO:
+- add transaction description
+- add summed current user debt in users list
+==========
+ */
 
 function App() {
   const { addUsers } = useGlobalContext();
@@ -27,7 +34,6 @@ function App() {
           </Route>
           <Route path="/transactions">
             <TransactionList />
-            <AddTransactionModal />
           </Route>
           <Route path="/debts">
             <DebtList />

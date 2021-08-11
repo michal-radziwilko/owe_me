@@ -56,6 +56,9 @@ img {
   box-shadow: var(--darkShadow);
   overflow: hidden;
 }
+.list-container h3 {
+  text-align: center;
+}
 /*
 ========== 
 NavBar
@@ -114,7 +117,6 @@ User
   height: 75px;
   object-fit: cover;
   border-radius: 50%;
-  box-shadow: var(--primaryColor);
 }
 
 @media screen and (min-width: 992px) {
@@ -131,10 +133,13 @@ User
   overflow-y: scroll;
   min-height: 90px;
 }
-.user-selector-list li {
+.user-selector-list-item {
   background: var(--primaryLightColor);
   border-radius: 0.4rem;
   cursor: pointer;
+}
+.selected {
+  background: var(--primaryColor);
 }
 /*
 ========== 
@@ -161,9 +166,6 @@ Transaction
   font-weight: 600;
   margin-left: 1rem;
 }
-.transaction-list h3 {
-  text-align: center;
-}
 /*
 ========== 
 Modal
@@ -179,10 +181,6 @@ Modal
   display: grid;
   place-items: center;
   transition: var(--mainTransition);
-  visibility: hidden;
-  z-index: -1;
-}
-.show-modal {
   visibility: visible;
   z-index: 10;
 }
@@ -197,6 +195,16 @@ Modal
   place-items: center;
   position: relative;
   justify-items: auto;
+  overflow: hidden;
+}
+.modal-container form {
+  display: flex;
+  margin: 0 0 0.5rem 11.5rem;
+  align-items: center;
+}
+.modal-container input {
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 .close-AddTransactionModal-btn {
   position: absolute;
@@ -214,6 +222,22 @@ Modal
 }
 .selected-transaction-party {
   cursor: pointer;
+}
+.submit-transaction-btn {
+  margin: auto 1rem auto;
+  width: 10rem;
+  height: 2rem;
+  border-radius: 0.25rem;
+  background: var(--primaryLightColor);
+  transition: var(--mainTransition);
+  border: 1px solid var(--primaryColor);
+  text-transform: capitalize;
+  font-size: 1.2rem;
+  font-weight: 550;
+  cursor: pointer;
+}
+.submit-transaction-btn:hover {
+  background: var(--primaryColor);
 }
 /*
 ========== 

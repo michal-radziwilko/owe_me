@@ -8,34 +8,22 @@ const ExpenseList = () => {
     let newExpenses = [...expenses];
     transactions.map((transaction) => {
       let senderInExpenses = false;
-      let receiverInExpenses = false;
       for (let i = 0; i < newExpenses.length; i++) {
-        if (newExpenses[i].user.id === transaction.sender.id) {
-          newExpenses[i].amount += transaction.amount;
+        if (
+          newExpenses[i].user.id === transaction.sender.id &&
+          transaction.isDebtSettlement
+        ) {
+          newExpenses[i].amount -= transaction.amount;
           senderInExpenses = true;
         }
-        if (newExpenses[i].user.id === transaction.receiver.id) {
-          newExpenses[i].amount -= transaction.amount;
-          receiverInExpenses = true;
-        }
       }
-      if (!senderInExpenses) {
+      if (!senderInExpenses && transaction.isDebtSettlement) {
         newExpenses = [
           ...newExpenses,
           {
             id: new Date().getTime().toString() + transaction.sender.id,
             user: transaction.sender,
             amount: transaction.amount,
-          },
-        ];
-      }
-      if (!receiverInExpenses) {
-        newExpenses = [
-          ...newExpenses,
-          {
-            id: new Date().getTime().toString() + transaction.receiver.id,
-            user: transaction.receiver,
-            amount: -transaction.amount,
           },
         ];
       }
@@ -47,9 +35,13 @@ const ExpenseList = () => {
   }, [transactions]);
   return (
     <div className="list-container">
-      {expenses.map((expense) => {
-        return <Expense key={expense.id} {...expense} />;
-      })}
+      {expenses.length > 0 ? (
+        expenses.map((expense) => {
+          return <Expense key={expense.id} {...expense} />;
+        })
+      ) : (
+        <h3>no expenses</h3>
+      )}
     </div>
   );
 };

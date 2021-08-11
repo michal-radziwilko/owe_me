@@ -5,10 +5,14 @@ const UserList = () => {
   const { users } = useGlobalContext();
   return (
     <section className="list-container">
-      {users &&
+      {users.length > 0 ? (
+        users &&
         users.map((user) => {
           return <User key={user.id} {...user} />;
-        })}
+        })
+      ) : (
+        <h3>no users</h3>
+      )}
     </section>
   );
 };

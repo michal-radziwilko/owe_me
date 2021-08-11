@@ -1,4 +1,3 @@
-import { react, useState, useEffect } from "react";
 import defaultUser from "../defaultUser.svg";
 const User = ({ name, image }) => {
   return (

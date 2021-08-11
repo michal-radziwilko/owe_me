@@ -6,7 +6,7 @@ const Alert = ({ type, msg, list }) => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       hideAlert();
-    }, 5000);
+    }, 3000);
     return () => {
       clearTimeout(timeout);
     };
