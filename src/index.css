@@ -1,7 +1,7 @@
 :root {
   --primaryLightColor: #8af3b6;
-  --primaryColor: #518a28;
-  --primaryDarkColor: #c02c03;
+  --primaryColor: #53926d;
+  --primaryDarkColor: rgb(55, 138, 110);
   --mainWhite: #fff;
   --offWhite: #f7f7f7;
   --mainBackground: #f1f5f8;
@@ -42,16 +42,13 @@ a {
   text-decoration: none;
   color: var(--mainBlack);
 }
-img {
-  width: 100%;
-  display: block;
-}
 .list-container {
+  display: grid;
   width: 90vw;
   margin: 5rem auto;
   max-width: var(--maxWidth);
   background: var(--primaryLightColor);
-  border-radius: 0.25rem;
+  border-radius: var(--mainBorderRadius);
   padding: 1.5rem 2rem;
   box-shadow: var(--darkShadow);
   overflow: hidden;
@@ -107,7 +104,7 @@ User
 .user {
   display: grid;
   grid-template-columns: auto 1fr;
-  column-gap: 0.75rem;
+  column-gap: 1rem;
   margin-bottom: 1rem;
   margin-top: 1rem;
   align-items: center;
@@ -147,24 +144,56 @@ Transaction
 ==========
  */
 .transaction {
-  display: grid;
-  grid-template-columns: 2fr 2fr 1fr 1fr;
-  column-gap: 0.75rem;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  align-items: center;
-  justify-items: center;
+  position: relative;
+  border-radius: var(--mainBorderRadius);
+  background: var(--primaryLightColor);
+  box-shadow: var(--darkShadow);
 }
-.transaction p {
+.transaction-list {
+  background: transparent;
+  row-gap: 2rem;
+  box-shadow: none;
+}
+.transaction-receiver-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.75rem;
+  margin: 1rem;
+  align-items: center;
+}
+
+.transaction .date {
+  margin: 0.5rem;
+  position: absolute;
+  right: 0;
+  width: auto;
   font-size: 1.2rem;
   font-weight: 500;
 }
-.transaction-list-headers {
+.transaction .time {
+  font-weight: 450;
+  font-size: 1rem;
+  text-align: right;
+}
+.transaction-description {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.transaction-sender {
   display: grid;
-  grid-template-columns: 2fr 2fr 1fr 1fr;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-left: 1rem;
+  margin: 1rem;
+  row-gap: 0.75rem;
+}
+.transaction-receiver {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  align-items: center;
+}
+.transaction-receiver p {
+  margin: 0.5rem;
+  font-weight: 450;
 }
 /*
 ========== 
@@ -191,20 +220,26 @@ Modal
   width: 90vw;
   height: 60vh;
   max-width: var(--maxWidth);
-  text-align: center;
   place-items: center;
   position: relative;
-  justify-items: auto;
   overflow: hidden;
 }
 .modal-container form {
-  display: flex;
-  margin: 0 0 0.5rem 11.5rem;
+  display: grid;
+  margin: 1rem;
   align-items: center;
+  justify-items: stretch;
+  grid-template-columns: 1fr 2fr;
 }
-.modal-container input {
+.amount-input {
+  margin: 1rem;
   font-size: 1.2rem;
   font-weight: 600;
+  grid-area: "input";
+}
+.modal-container input {
+  margin: 1rem;
+  font-size: 1.2rem;
 }
 .close-AddTransactionModal-btn {
   position: absolute;
@@ -219,15 +254,27 @@ Modal
 .modal-container h3 {
   font-size: 3rem;
   font-weight: 500;
+  justify-self: left;
+  margin-left: 12%;
+}
+.modal-container form h4 {
+  font-size: 1.3rem;
 }
 .selected-transaction-party {
+  justify-self: start;
   cursor: pointer;
+  margin: 0 12%;
+}
+.modal-content-top-margin {
+  margin-top: 4rem;
 }
 .submit-transaction-btn {
-  margin: auto 1rem auto;
+  margin: 2rem 1rem auto;
   width: 10rem;
   height: 2rem;
-  border-radius: 0.25rem;
+  border-radius: var(--mainBorderRadius);
+  grid-column: span 2;
+  justify-self: center;
   background: var(--primaryLightColor);
   transition: var(--mainTransition);
   border: 1px solid var(--primaryColor);
@@ -253,6 +300,7 @@ Debt
   cursor: pointer;
 }
 .debt p {
+  margin: auto 1rem;
   font-size: 1.2rem;
   font-weight: 500;
 }
@@ -284,7 +332,7 @@ Alert
   text-align: center;
   font-size: 1.5rem;
   font-weight: 500;
-  border-radius: 0.25rem;
+  border-radius: var(--mainBorderRadius);
   text-transform: capitalize;
 }
 .alert-danger {
@@ -312,6 +360,7 @@ Buttons
   background: var(--primaryLightColor);
   cursor: pointer;
   transition: var(--mainTransition);
+  z-index: 1;
 }
 .add-btn:hover {
   background: var(--primaryColor);

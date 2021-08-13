@@ -6,27 +6,35 @@ const ExpenseList = () => {
   const { transactions } = useGlobalContext();
   const calculateExpenses = () => {
     let newExpenses = [...expenses];
-    transactions.map((transaction) => {
-      let senderInExpenses = false;
-      for (let i = 0; i < newExpenses.length; i++) {
-        if (
-          newExpenses[i].user.id === transaction.sender.id &&
-          transaction.isDebtSettlement
-        ) {
-          newExpenses[i].amount -= transaction.amount;
-          senderInExpenses = true;
+    transactions.forEach((transaction) => {
+      const amount = parseFloat(
+        Math.round(
+          (transaction.amount / transaction.receivers.length + Number.EPSILON) *
+            100
+        ) / 100
+      );
+      transaction.receivers.forEach((receiver) => {
+        let senderInExpenses = false;
+        for (let i = 0; i < newExpenses.length; i++) {
+          if (
+            newExpenses[i].user.id === receiver.id &&
+            !transaction.isDebtSettlement
+          ) {
+            newExpenses[i].amount += amount;
+            senderInExpenses = true;
+          }
         }
-      }
-      if (!senderInExpenses && transaction.isDebtSettlement) {
-        newExpenses = [
-          ...newExpenses,
-          {
-            id: new Date().getTime().toString() + transaction.sender.id,
-            user: transaction.sender,
-            amount: transaction.amount,
-          },
-        ];
-      }
+        if (!senderInExpenses && !transaction.isDebtSettlement) {
+          newExpenses = [
+            ...newExpenses,
+            {
+              id: new Date().getTime().toString() + receiver.id,
+              user: receiver,
+              amount,
+            },
+          ];
+        }
+      });
     });
     setExpenses(newExpenses);
   };

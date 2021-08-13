@@ -11,8 +11,7 @@ import ExpenseList from "./components/ExpenseList";
 /*
 ========== 
 TO-DO:
-- add transaction description
-- add summed current user debt in users list
+- add summed current user debt in user list
 ==========
  */
 

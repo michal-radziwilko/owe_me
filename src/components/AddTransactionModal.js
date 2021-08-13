@@ -14,22 +14,20 @@ const AddTransactionModal = ({
   const [amount, setAmount] = useState(_amount ? _amount : "");
   const [sender, setSender] = useState(_sender ? _sender : {});
   const [receivers, setReceivers] = useState(_receiver ? [_receiver] : []);
+  const [description, setDescription] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
     if (Object.keys(sender).length > 0 && receivers.length > 0 && amount > 0) {
-      receivers.forEach((receiver) => {
-        const transaction = {
-          id: receiver.id.toString() + new Date().getTime().toString(),
-          date: new Date(),
-          sender,
-          receiver,
-          amount: parseFloat(
-            Math.round((amount / receivers.length + Number.EPSILON) * 100) / 100
-          ),
-          isDebtSettlement,
-        };
-        addTransaction(transaction);
-      });
+      const transaction = {
+        id: sender.id.toString() + new Date().getTime().toString(),
+        date: new Date(),
+        sender,
+        receivers,
+        amount,
+        description,
+        isDebtSettlement,
+      };
+      addTransaction(transaction);
       showAlert("success", "Transaction Successfull");
     } else {
       showAlert(
@@ -59,7 +57,7 @@ const AddTransactionModal = ({
                   setSender({});
                 }
               }}
-              className="selected-transaction-party"
+              className="selected-transaction-party modal-content-top-margin"
             >
               <User {...sender} />
             </div>
@@ -75,9 +73,18 @@ const AddTransactionModal = ({
             setSelectedUsers={setReceivers}
             selectedUsers={receivers}
           />
-          <h3>amount</h3>
           <form onSubmit={handleSubmit}>
+            <h4>description:</h4>
             <input
+              type="text"
+              value={description}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+            />
+            <h4>amount:</h4>
+            <input
+              className="amount-input"
               type="number"
               min="0.01"
               step="0.01"
@@ -104,15 +111,27 @@ const AddTransactionModal = ({
     return (
       <div className="modal-overlay">
         <div className="modal-container">
-          <h3>from</h3>
+          <h3 className="modal-content-top-margin">from</h3>
           <div className="selected-transaction-party">
             <User {...sender} />
           </div>
           <h3>to</h3>
-          <User {...receivers[0]} />
+          <div className="selected-transaction-party">
+            <User {...receivers[0]} />
+          </div>
           <h3>amount</h3>
           <form onSubmit={handleSubmit}>
+            <h4>description:</h4>
             <input
+              type="text"
+              value={description ? description : "Debt settlement"}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+            />
+            <h4>amount:</h4>
+            <input
+              className="amount-input"
               type="number"
               min="0.01"
               step="0.01"
