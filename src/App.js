@@ -8,13 +8,6 @@ import DebtList from "./components/DebtList";
 import { useGlobalContext } from "./context";
 import ExpenseList from "./components/ExpenseList";
 
-/*
-========== 
-TO-DO:
-- add summed current user debt in user list
-==========
- */
-
 function App() {
   const { addUsers } = useGlobalContext();
   useEffect(() => {

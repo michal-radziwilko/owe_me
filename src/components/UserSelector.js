@@ -10,7 +10,7 @@ const UserSelector = ({
   const { users } = useGlobalContext();
   const checkIfUserSelected = (checkUser) => {
     let result = false;
-    selectedUsers.map((selectedUser) => {
+    selectedUsers.forEach((selectedUser) => {
       if (selectedUser.id === checkUser.id) {
         result = true;
       }

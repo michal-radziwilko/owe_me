@@ -138,6 +138,22 @@ User
 .selected {
   background: var(--primaryColor);
 }
+.user-list-item {
+  display: grid;
+  grid-template-columns: 19fr 1fr;
+  align-items: center;
+}
+.user-list-item p {
+  border-radius: var(--mainBorderRadius);
+  font-size: 1.5rem;
+  font-weight: 450;
+}
+.positive-user-balance {
+  background: #00b83d7a;
+}
+.negative-user-balance {
+  background: #ff6c6cb0;
+}
 /*
 ========== 
 Transaction

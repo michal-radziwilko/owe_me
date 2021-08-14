@@ -15,9 +15,9 @@ const DebtList = () => {
   } = useGlobalContext();
   const updateDebtsArray = () => {
     let newDebtsArray = [];
-    users.map((user) => {
+    users.forEach((user) => {
       if (user.debts.length > 0) {
-        user.debts.map((debt) => {
+        user.debts.forEach((debt) => {
           newDebtsArray.push({ ...debt, debtor: user });
         });
       }

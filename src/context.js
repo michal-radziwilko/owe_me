@@ -22,7 +22,7 @@ const AppProvider = ({ children }) => {
       const data = await response.json();
       const users = data.results;
       const newUsers = [];
-      users.map((user) => {
+      users.forEach((user) => {
         const { first, last } = user.name;
         const { large } = user.picture;
         const { uuid } = user.login;
