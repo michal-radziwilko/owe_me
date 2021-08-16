@@ -366,8 +366,8 @@ Buttons
  */
 .add-btn {
   position: fixed;
-  right: 4rem;
-  top: 8rem;
+  top: 6.5rem;
+  right: 35%;
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
