@@ -35,7 +35,11 @@ const AddTransactionModal = ({
         "Transaction Successfull"
       );
     } else {
-      showAlert("danger", "Please select both transaction parties.");
+      showAlert(
+        `${isDebtSettlement ? "DebtList" : "TransactionList"}`,
+        "danger",
+        "Please select both transaction parties."
+      );
     }
   };
   const clearTransaction = () => {
