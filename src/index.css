@@ -340,16 +340,16 @@ Alert
 ==========
  */
 .alert {
-  margin: 5rem auto;
+  position: fixed;
+  margin: -2% 0 0 40%;
   height: auto;
-  width: 30vw;
-  display: grid;
-  align-items: center;
+  width: 20vw;
   text-align: center;
   font-size: 1.5rem;
   font-weight: 500;
   border-radius: var(--mainBorderRadius);
   text-transform: capitalize;
+  z-index: 20;
 }
 .alert-danger {
   color: #721c24;

@@ -18,9 +18,7 @@ const Transaction = ({ sender, receivers, amount, date, description }) => {
     return (
       (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) +
       ":" +
-      (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) +
-      ":" +
-      (date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds())
+      (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes())
     );
   };
   return (

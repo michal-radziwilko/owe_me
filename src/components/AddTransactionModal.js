@@ -28,14 +28,15 @@ const AddTransactionModal = ({
         isDebtSettlement,
       };
       addTransaction(transaction);
-      showAlert("success", "Transaction Successfull");
-    } else {
+      handleCloseModal();
       showAlert(
-        "danger",
-        "Transaction failed. Please select both transaction parties."
+        `${isDebtSettlement ? "DebtList" : "TransactionList"}`,
+        "success",
+        "Transaction Successfull"
       );
+    } else {
+      showAlert("danger", "Please select both transaction parties.");
     }
-    handleCloseModal();
   };
   const clearTransaction = () => {
     setSender({});

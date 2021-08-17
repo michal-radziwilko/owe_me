@@ -15,7 +15,7 @@ const TransactionList = () => {
     <div>
       {isAddTransactionModalOpen && <AddTransactionModal />}
 
-      {alert.show && (
+      {alert.show && alert.component === "TransactionList" && (
         <Alert type={alert.type} msg={alert.msg} list={transactions} />
       )}
       <div

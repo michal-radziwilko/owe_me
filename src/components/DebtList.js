@@ -36,11 +36,11 @@ const DebtList = () => {
     openAddTransactionModal();
   };
   return (
-    <>
+    <div>
       {isAddTransactionModalOpen && (
         <AddTransactionModal {...debt} isDebtSettlement={true} />
       )}
-      {alert.show && (
+      {alert.show && alert.component === "DebtList" && (
         <Alert type={alert.type} msg={alert.msg} list={transactions} />
       )}
       <div className="list-container">
@@ -56,7 +56,7 @@ const DebtList = () => {
           <h3>no debts</h3>
         )}
       </div>
-    </>
+    </div>
   );
 };
 export default DebtList;

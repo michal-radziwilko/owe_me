@@ -13,6 +13,7 @@ const AppProvider = ({ children }) => {
       show: false,
       type: "",
       msg: "",
+      component: "",
     },
   };
   const [state, dispatch] = useReducer(reducer, initialValue);
@@ -55,8 +56,8 @@ const AppProvider = ({ children }) => {
   const closeAddTransactionModal = () => {
     dispatch({ type: "CLOSE_ADD_TRANSACTION_MODAL" });
   };
-  const showAlert = (type, msg) => {
-    dispatch({ type: "SHOW_ALERT", payload: { msg, type } });
+  const showAlert = (component, type, msg) => {
+    dispatch({ type: "SHOW_ALERT", payload: { msg, type, component } });
   };
   const hideAlert = () => {
     dispatch({ type: "HIDE_ALERT" });

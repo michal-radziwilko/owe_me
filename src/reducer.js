@@ -101,7 +101,12 @@ const reducer = (state, action) => {
   if (action.type === "SHOW_ALERT") {
     return {
       ...state,
-      alert: { show: true, msg: action.payload.msg, type: action.payload.type },
+      alert: {
+        show: true,
+        msg: action.payload.msg,
+        type: action.payload.type,
+        component: action.payload.component,
+      },
     };
   }
   if (action.type === "HIDE_ALERT") {
