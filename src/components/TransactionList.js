@@ -31,11 +31,7 @@ const TransactionList = () => {
         )}
         {transactions &&
           transactions.map((transaction) => {
-            return (
-              !transaction.isDebtSettlement && (
-                <Transaction key={transaction.id} {...transaction} />
-              )
-            );
+            return <Transaction key={transaction.id} {...transaction} />;
           })}
       </div>
     </div>
