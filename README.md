@@ -29,8 +29,8 @@ To be able to send the transaction user must pick sender and at least one receiv
 Required fields have select validation, input fields have the format validation. User can send properly created transaction by clicking the submit button at the bottom of the modal. Ater sending the transaction the modal closes and the alert with the transaction status is displayed for 3 seconds.
 User can also close the modal manually without sending the transaction by clicking the red 'x' button located at the top right of the modal.
 
-![transactions](https://user-images.githubusercontent.com/17910896/130065449-74216940-4773-4c83-b1fb-58b74eb2de7e.PNG)
-![add transaction modal](https://user-images.githubusercontent.com/17910896/130065562-5e5647e6-dc17-4d63-9ab5-280e5c9ba052.PNG)
+![transactions](https://user-images.githubusercontent.com/17910896/130066666-105dbb17-11a4-4b3a-9e09-ab7dd798bdd9.PNG)
+![add_transaction_modal](https://user-images.githubusercontent.com/17910896/130066776-5481ccdb-231f-4dce-b210-be68d7be48db.PNG)
 
 ### Debts
 
